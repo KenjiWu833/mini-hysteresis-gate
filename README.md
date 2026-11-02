@@ -48,3 +48,10 @@ lets callers forward an uninitialised sensor reading without an extra guard.
   - `.fall` — property, the normalized fall threshold.
   - `.state` — current boolean state, readable and writable.
   - `.update(value)` — feed a sample, returns the new boolean state.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
